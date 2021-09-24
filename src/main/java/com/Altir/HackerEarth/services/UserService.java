@@ -47,9 +47,6 @@ public class UserService {
             return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
         }
     }
-    // public ResponseEntity<Object> addSingleRoomBooking(@RequestBody Request request) {
-    //     return null;
-    // }
     public ResponseEntity<Object> addUser(Users user, Person person) {
         try {
             Optional<Users> CurUser=userRepository.findByEmail(user.getEmail());

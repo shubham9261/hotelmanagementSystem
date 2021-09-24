@@ -1,5 +1,5 @@
 package com.Altir.HackerEarth.utils;
-
+import java.util.*;
 public class Request {
     private Integer price;
     private String startDate;
@@ -16,6 +16,14 @@ public class Request {
     private Integer role;
     private Integer userId;
     private Integer roomId;
+    private List<Integer> roomsList;
+    
+    public List<Integer> getRoomsList() {
+        return roomsList;
+    }
+    public void setRoomsList(List<Integer> roomsList) {
+        this.roomsList = roomsList;
+    }
     public Integer getPrice() {
         return price;
     }

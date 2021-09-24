@@ -29,19 +29,28 @@ public class AdminController {
     @GetMapping("/fetchRevenue")
     public ResponseEntity<Object> fetchRevenue()
     {
+        System.out.println("==================================================================+++++++++++++++++++++++++++++++++++++++");
         return adminService.fetchRevenue();
     }
     @GetMapping("/fetchAvailableRooms")
     public ResponseEntity<Object> fetchAvailableRooms()
     {
-        return adminService.fetchAvailableRooms();
+        try {
+            return roomService.findRoomsByStatus(0);
+        } catch (Exception e) {
+            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+        }
     }
     @GetMapping("/fetchBookedRooms")
     public ResponseEntity<Object> fetchBookedRooms()
     {
-        return adminService.fetchBookedRooms();
+        try {
+            return roomService.findRoomsByStatus(1);
+        } catch (Exception e) {
+            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+        }
     }
-    @PostMapping("/addRooms") // add single room for 1 or more days
+    @PostMapping("/addRooms") 
     public ResponseEntity<Object> addRooms(@RequestBody Request req)
     {
         try {
@@ -53,11 +62,10 @@ public class AdminController {
             return roomService.addRooms(room);
 
         } catch (Exception e) {
-            //TODO: handle exception
             return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
         }
     }
-    @PostMapping("/removeRooms") // add single room for 1 or more days
+    @PostMapping("/removeRooms") 
     public ResponseEntity<Object> removeRooms(@RequestBody Request req)
     {
         try {
@@ -69,11 +77,10 @@ public class AdminController {
             return roomService.removeRooms(room);
 
         } catch (Exception e) {
-            //TODO: handle exception
             return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
         }
     }
-    @PostMapping("/updateRooms") // add single room for 1 or more days
+    @PostMapping("/updateRooms") 
     public ResponseEntity<Object> updateRooms(@RequestBody Request req)
     {
         try {
@@ -85,7 +92,6 @@ public class AdminController {
             return roomService.updateRooms(room);
 
         } catch (Exception e) {
-            //TODO: handle exception
             return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
         }
     }

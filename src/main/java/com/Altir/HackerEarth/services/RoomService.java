@@ -21,7 +21,6 @@ public class RoomService {
             roomRepository.save(room);
             return   ResponseUtil.successResponse(room, "Room added Successfully",HttpStatus.valueOf(200));
         } catch (Exception e) {
-            //TODO: handle exception
             return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
         }
     }

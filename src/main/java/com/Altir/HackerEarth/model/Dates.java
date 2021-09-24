@@ -12,8 +12,9 @@ public class Dates {
     private Integer id;
     private Date startDate;
     private Date endDate;
-    
+    public Dates(){}
     public Dates(Date startDate, Date endDate) {
+        super();
         this.startDate = startDate;
         this.endDate = endDate;
     }

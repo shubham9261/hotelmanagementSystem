@@ -99,6 +99,9 @@ public class UserController {
             Optional<Room> rentedRoom=roomRepository.findById(req.getRoomId());
             if(( (rentedRoom.get().getStatus()==1) ))
                 return ResponseUtil.errorResponse(null, "Room is not available",HttpStatus.valueOf(500));
+            rentedRoom.get().setStatus(1);
+            System.out.println("printing rented room  "+ rentedRoom.get());
+            roomRepository.save(rentedRoom);
             Booking booking=new Booking(user, rooms, date, days*rentedRoom.get().getPrice());
             return userService.addSingleRoomBooking(booking);
        } catch (Exception e) {
@@ -108,6 +111,39 @@ public class UserController {
     // @PostMapping("/addMultipleRoomBooking") //book multiple rooms for a single date
     // public ResponseEntity<Object> addMultipleRoomBooking(@RequestBody Request req)
     // {
-    //     return userService.addMultipleRoomBooking();
+    //     try {
+    //         List<Room> rooms=new ArrayList<>();
+    //         for(Integer i=0;i<req.getRoomsList().size();i++)
+    //             rooms.add(req.getRoomsList().get(i));
+    //         Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(req.getStartDate());
+    //         Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(req.getEndDate());
+    //         long timeDiff=date2.getTime()-date1.getTime();
+    //         int temp;
+    //         if(timeDiff<0)
+    //         {
+    //             return ResponseUtil.errorResponse(null, "Please enter correct date",HttpStatus.valueOf(500));
+    //         }
+    //         else{
+    //              temp=(int)(timeDiff/(1000*60*60*24))%365;
+    //         }
+    //         Integer days=new Integer(temp);
+    //         Users user=new Users(req.getUserId());
+    //         Dates date=new Dates(date1,date2);
+    //         Integer totalPrice=0;
+    //         for(Integer i=0;i<req.getRoomsList().size();i++)
+    //         {
+    //             Integer id=req.getRoomsList().get(i);
+    //             Optional<Room> rentedRoom=roomRepository.findById(id);
+    //             if(( (rentedRoom.get().getStatus()==1) ))
+    //                 return ResponseUtil.errorResponse(null, "Room is not available",HttpStatus.valueOf(500));
+    //             rentedRoom.get().setStatus(1);
+    //             roomRepository.save(rentedRoom);
+    //             totalPrice+=(days*rentedRoom.get().getPrice());
+    //         }
+    //         Booking booking=new Booking(user, rooms, date, totalPrice);
+    //         return userService.addSingleRoomBooking(booking);
+    //    } catch (Exception e) {
+    //        return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+    //    }
     // }
 }
