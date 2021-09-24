@@ -24,7 +24,6 @@ public class AdminService {
             List<Room> room=roomRepository.findAll();
             return ResponseUtil.successResponse(room,"Details of all the rooms are sent", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            //TODO: handle exception
             return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
         }
     }
@@ -57,7 +56,6 @@ public class AdminService {
             }
             return ResponseUtil.successResponse(availableRooms,"Details of all the available rooms are sent", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            //TODO: handle exception
             return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
         }
     }
@@ -74,7 +72,6 @@ public class AdminService {
             }
             return ResponseUtil.successResponse(bookedRooms,"Details of all the booked rooms are sent", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            //TODO: handle exception
             return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
         }
     }

@@ -36,14 +36,12 @@ public class UserController {
     private RoomService roomService;
     @Autowired
     private RoomRepository roomRepository;
-    //User is allowed to fetch only those rooms which are not booked
     @GetMapping("/viewBookedRooms")
     public ResponseEntity<Object> viewBookedRooms()
     {
        try {
            return roomService.findRoomsByStatus(1);
        } catch (Exception e) {
-           //TODO: handle exception
            return ResponseUtil.errorResponse(null,"Exception thrown", HttpStatus.valueOf(500));
        }
     }
@@ -53,11 +51,10 @@ public class UserController {
        try {
         return roomService.findRoomsByStatus(0);
        } catch (Exception e) {
-           //TODO: handle exception
            return ResponseUtil.errorResponse(null,"Exception thrown", HttpStatus.valueOf(500));
        }
     }
-    @PostMapping("/addUser") // add single room for 1 or more days
+    @PostMapping("/addUser") 
     public ResponseEntity<Object> addUser(@RequestBody Request req)
     {
         try {
