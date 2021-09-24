@@ -54,7 +54,7 @@ public class AdminController {
 
         } catch (Exception e) {
             //TODO: handle exception
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
     @PostMapping("/removeRooms") // add single room for 1 or more days
@@ -70,7 +70,7 @@ public class AdminController {
 
         } catch (Exception e) {
             //TODO: handle exception
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
     @PostMapping("/updateRooms") // add single room for 1 or more days
@@ -86,7 +86,7 @@ public class AdminController {
 
         } catch (Exception e) {
             //TODO: handle exception
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
 }
