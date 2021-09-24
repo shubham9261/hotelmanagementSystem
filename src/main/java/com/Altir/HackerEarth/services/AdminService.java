@@ -32,6 +32,7 @@ public class AdminService {
     public ResponseEntity<Object> fetchRevenue() {
         try {
             List<Booking> bookings=bookingRepository.findAll();
+
             Integer totalPrice=0;
             for(int i=0;i<bookings.size();i++)
             {
@@ -39,8 +40,8 @@ public class AdminService {
             }
             return ResponseUtil.successResponse(totalPrice,"Net revenue of all the booked rooms are sent", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            //TODO: handle exception
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            System.out.println(e);
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
 

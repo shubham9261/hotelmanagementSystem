@@ -34,12 +34,12 @@ public class AdminController {
     @GetMapping("/fetchAvailableRooms")
     public ResponseEntity<Object> fetchAvailableRooms()
     {
-        return adminService.fetchAvailableRooms();
+        return roomService.findRoomsByStatus(0);
     }
     @GetMapping("/fetchBookedRooms")
     public ResponseEntity<Object> fetchBookedRooms()
     {
-        return adminService.fetchBookedRooms();
+        return roomService.findRoomsByStatus(1);
     }
     @PostMapping("/addRooms") // add single room for 1 or more days
     public ResponseEntity<Object> addRooms(@RequestBody Request req)
