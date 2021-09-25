@@ -35,20 +35,12 @@ public class AdminController {
     @GetMapping("/fetchAvailableRooms")
     public ResponseEntity<Object> fetchAvailableRooms()
     {
-        try {
-            return roomService.findRoomsByStatus(0);
-        } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
-        }
+        return roomService.findRoomsByStatus(0);
     }
     @GetMapping("/fetchBookedRooms")
     public ResponseEntity<Object> fetchBookedRooms()
     {
-        try {
-            return roomService.findRoomsByStatus(1);
-        } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
-        }
+        return roomService.findRoomsByStatus(1);
     }
     @PostMapping("/addRooms") 
     public ResponseEntity<Object> addRooms(@RequestBody Request req)
@@ -62,7 +54,7 @@ public class AdminController {
             return roomService.addRooms(room);
 
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
     @PostMapping("/removeRooms") 
@@ -77,10 +69,10 @@ public class AdminController {
             return roomService.removeRooms(room);
 
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
-    @PostMapping("/updateRooms") 
+    @PostMapping("/updateRooms")
     public ResponseEntity<Object> updateRooms(@RequestBody Request req)
     {
         try {
@@ -92,7 +84,7 @@ public class AdminController {
             return roomService.updateRooms(room);
 
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
 }

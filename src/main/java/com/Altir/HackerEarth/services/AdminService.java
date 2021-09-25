@@ -28,7 +28,7 @@ public class AdminService {
             List<Room> room=roomRepository.findAll();
             return ResponseUtil.successResponse(room,"Details of all the rooms are sent", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
 
@@ -51,12 +51,17 @@ public class AdminService {
     
     public ResponseEntity<Object> addRooms(@RequestBody Request req) {
         try {
-            Users user=new Users(req.getFirstName(),req.getLastName(),
-                req.getPhoneNo().req.getAddress(),req.getEmail(),req.get);
-            roomRepository.add(room);
-            return ResponseUtil.successResponse(room,"Room is added successfullly", HttpStatus.valueOf(200));
+            List<Booking> bookings=bookingRepository.findAll();
+
+            Integer totalPrice=0;
+            for(int i=0;i<bookings.size();i++)
+            {
+                totalPrice+=bookings.get(i).getPrice();
+            }
+            return ResponseUtil.successResponse(totalPrice,"Net revenue of all the booked rooms are sent", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            System.out.println(e);
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
 
@@ -65,7 +70,7 @@ public class AdminService {
             roomRepository.delete(room);
             return ResponseUtil.successResponse(room,"Room is deleted successfullly", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
 
@@ -74,7 +79,7 @@ public class AdminService {
             roomRepository.save(room);
             return ResponseUtil.successResponse(room,"Room is updated successfullly", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
     
