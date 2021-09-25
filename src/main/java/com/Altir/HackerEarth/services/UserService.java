@@ -43,7 +43,7 @@ public class UserService {
             }
             return ResponseUtil.successResponse(availableRooms,"Details of all the available rooms are sent", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, "Exception thrown "+e.getMessage(),HttpStatus.valueOf(500));
         }
     }
     public ResponseEntity<Object> addUser(Users user, Person person) {
@@ -58,7 +58,7 @@ public class UserService {
             return ResponseUtil.successResponse(user,"User added Successfully", HttpStatus.valueOf(200));
 
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, "Exception thrown "+e.getMessage(),HttpStatus.valueOf(500));
         }
     }
     public ResponseEntity<Object> addSingleRoomBooking(Booking booking) {
@@ -67,7 +67,7 @@ public class UserService {
             bookingRepository.save(booking);
             return ResponseUtil.successResponse(booking,"Room booked Successfully", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown while booking a room",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, "Exception thrown while booking a room "+e.getMessage(),HttpStatus.valueOf(500));
         }
     }
 }

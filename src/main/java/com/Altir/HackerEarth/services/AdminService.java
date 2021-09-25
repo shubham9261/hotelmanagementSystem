@@ -24,7 +24,7 @@ public class AdminService {
             List<Room> room=roomRepository.findAll();
             return ResponseUtil.successResponse(room,"Details of all the rooms are sent", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
 
@@ -56,7 +56,7 @@ public class AdminService {
             }
             return ResponseUtil.successResponse(availableRooms,"Details of all the available rooms are sent", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
 
@@ -72,40 +72,8 @@ public class AdminService {
             }
             return ResponseUtil.successResponse(bookedRooms,"Details of all the booked rooms are sent", HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
-
-    // public ResponseEntity<Object> addRooms(@RequestBody Request req) {
-    //     try {
-    //         Users user=new Users(req.getFirstName(),req.getLastName(),
-    //             req.getPhoneNo().req.getAddress(),req.getEmail(),req.get)
-    //         roomRepository.add(room);
-    //         return ResponseUtil.successResponse(room,"Room is added successfullly", HttpStatus.valueOf(200));
-    //     } catch (Exception e) {
-    //         //TODO: handle exception
-    //         return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
-    //     }
-    // }
-
-    // public ResponseEntity<Object> removeRooms() {
-    //     try {
-    //         roomRepository.delete(room);
-    //         return ResponseUtil.successResponse(room,"Room is deleted successfullly", HttpStatus.valueOf(200));
-    //     } catch (Exception e) {
-    //         //TODO: handle exception
-    //         return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
-    //     }
-    // }
-
-    // public ResponseEntity<Object> updateRooms() {
-    //     try {
-    //         roomRepository.save(room);
-    //         return ResponseUtil.successResponse(room,"Room is updated successfullly", HttpStatus.valueOf(200));
-    //     } catch (Exception e) {
-    //         //TODO: handle exception
-    //         return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
-    //     }
-    // }
     
 }

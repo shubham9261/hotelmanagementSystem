@@ -37,7 +37,7 @@ public class RoomService {
             roomRepository.save(room);
             return   ResponseUtil.successResponse(room, "Room added Successfully",HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
     public ResponseEntity<Object> findRoomsByStatus(Integer Status) {
@@ -53,7 +53,7 @@ public class RoomService {
              }
              return ResponseUtil.successResponse(null, "No Rooms Present",HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
     public ResponseEntity<Object> removeRooms(Room room) {
@@ -61,7 +61,7 @@ public class RoomService {
             roomRepository.delete(room);
             return ResponseUtil.successResponse(room, "Room deleted Successfully",HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
     public ResponseEntity<Object> updateRooms(Room room) {
@@ -69,7 +69,7 @@ public class RoomService {
             roomRepository.save(room);
             return ResponseUtil.successResponse(room, "Room updated Successfully",HttpStatus.valueOf(200));
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, "Exception thrown "+ e.getMessage(),HttpStatus.valueOf(500));
         }
     }
     public ResponseEntity<Object> addSingleRoomBooking(Request req){
@@ -100,7 +100,7 @@ public class RoomService {
                 return userService.addSingleRoomBooking(booking);
             } catch (Exception e) {
                 //TODO: handle exception
-                return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+                return ResponseUtil.errorResponse(null, "Exception thrown "+e.getMessage(),HttpStatus.valueOf(500));
             }
     }
     public ResponseEntity<Object>  addMultipleRoomBooking(Request req){
@@ -144,7 +144,7 @@ public class RoomService {
             return userService.addSingleRoomBooking(booking);
         } catch (Exception e) {
             //TODO: handle exception
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, "Exception thrown "+e.getMessage(),HttpStatus.valueOf(500));
         }
 
     }

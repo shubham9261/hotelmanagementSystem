@@ -42,7 +42,7 @@ public class UserController {
        try {
            return roomService.findRoomsByStatus(1);
        } catch (Exception e) {
-           return ResponseUtil.errorResponse(null,"Exception thrown", HttpStatus.valueOf(500));
+           return ResponseUtil.errorResponse(null,e.getMessage(), HttpStatus.valueOf(500));
        }
     }
     @GetMapping("/viewAvailableRooms")
@@ -51,7 +51,7 @@ public class UserController {
        try {
         return roomService.findRoomsByStatus(0);
        } catch (Exception e) {
-           return ResponseUtil.errorResponse(null,"Exception thrown", HttpStatus.valueOf(500));
+           return ResponseUtil.errorResponse(null,e.getMessage(), HttpStatus.valueOf(500));
        }
     }
     @PostMapping("/addUser") 
@@ -69,7 +69,7 @@ public class UserController {
             Person person=new Person(firstName,LastName,phoneNo,address,user);
            return userService.addUser(user,person);
         } catch (Exception e) {
-            return ResponseUtil.errorResponse(null, "Exception thrown",HttpStatus.valueOf(500));
+            return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
     @PostMapping("/addSingleRoomBooking") // add single room for 1 or more days
