@@ -56,10 +56,15 @@ public class RoomService {
             return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
     }
-    public ResponseEntity<Object> removeRooms(Room room) {
+    public ResponseEntity<Object> removeRooms(Integer room) {
         try {
-            roomRepository.delete(room);
-            return ResponseUtil.successResponse(room, "Room deleted Successfully",HttpStatus.valueOf(200));
+            Optional<Room> rentedRoom=roomRepository.findById(room);
+            if(rentedRoom.isEmpty())
+            {
+                return ResponseUtil.errorResponse(null,"Room does not exists in the database",HttpStatus.valueOf(500));
+            }
+            roomRepository.delete(rentedRoom.get());
+            return ResponseUtil.successResponse(rentedRoom.get(), "Room deleted Successfully",HttpStatus.valueOf(200));
         } catch (Exception e) {
             return ResponseUtil.errorResponse(null, e.getMessage(),HttpStatus.valueOf(500));
         }
