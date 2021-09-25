@@ -104,16 +104,12 @@ public class RoomService {
                 Booking booking=new Booking(user, rooms, date, days*rentedRoom.get().getPrice());
                 return userService.addSingleRoomBooking(booking);
             } catch (Exception e) {
-                //TODO: handle exception
                 return ResponseUtil.errorResponse(null, "Exception thrown "+e.getMessage(),HttpStatus.valueOf(500));
             }
     }
     public ResponseEntity<Object>  addMultipleRoomBooking(Request req){
         try {
             List<Integer> roomsList=req.getRoomList();
-            // Room room=new Room(req.getRoomList());
-            // List<Room> rooms=new ArrayList<>();
-            // rooms.add(room);
             Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(req.getStartDate());
             Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(req.getEndDate());
             long timeDiff=date2.getTime()-date1.getTime();
@@ -138,7 +134,6 @@ public class RoomService {
                 {
                     roomsNotBooked.add(rentedRoom.get().getId());
                     continue;
-                   // return ResponseUtil.errorResponse(null, "Room is not available",HttpStatus.valueOf(500));
                 }
                 rentedRoom.get().setStatus(1);
                 roomRepository.save(rentedRoom.get());
@@ -148,7 +143,6 @@ public class RoomService {
             Booking booking=new Booking(user, bookedRoom, date,totalPrice );
             return userService.addSingleRoomBooking(booking);
         } catch (Exception e) {
-            //TODO: handle exception
             return ResponseUtil.errorResponse(null, "Exception thrown "+e.getMessage(),HttpStatus.valueOf(500));
         }
 
